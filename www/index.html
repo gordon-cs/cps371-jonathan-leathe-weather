@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- ionic/angularjs js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/ionic/js/angular/angular-resource.js"></script>
+
+
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/weathersettings.js"></script>
+
+
+</head>
+
+<body ng-app="weather" class="background">
+
+
+  <ion-header-bar class="bar-dark">
+    <h1 class="title">Wenham, MA</h1>
+    <button class="button"  ng-click="temperatureUnitChange(unit)" >Toggle Units (&degF/&degC)</button>
+    <button class="button icon-right ion-plus"></button>
+  </ion-header-bar>
+
+  <ion-pane ng-controller="MainCtrl">
+    <ion-content scroll="true" class="style">
+      <div class="row row-67 center ">
+        <div class="col outer">
+
+          <div class="inner">
+            <h1 class="title">Today</h1>
+            <script>
+              console.log("today")
+            </script>
+            Currently: {{place.daily.data[0].temperatureMax}} {{unit.text}}
+            <br> Wind Speed: {{place.daily.data[0].windSpeed}} MPH
+            <br>Humidity: {{place.daily.data[0].humidity}}%
+            <br>Visibility: {{place.daily.data[0].visibility}}%
+            <br>Summary: {{place.daily.data[0].summary}}
+
+          </div>
+          <div class="container">
+              <form ng-submit="getLatLngAndWeather(zipCode)">
+                <input type="text" maxLength="5" ng-model="zipCode" name="zipCode" class="zip-input"> </form>
+              <button class="btn btn-default zip-button" ng-click="getLatLngAndWeather(zipCode)" type="submit">change zip</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[0]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[1].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[1].temperatureMin }}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[1].windSpeed }} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[1].summary }}</label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[1]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[2].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[2].temperatureMin }}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[2].windSpeed }} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[2].summary }}</label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[2]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[3].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[3].temperatureMin }}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[3].windSpeed }} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[3].summary }}</label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[3]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[4].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[4].temperatureMin}}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[4].windSpeed }} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[4].summary }}</label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[4]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[5].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[5].temperatureMin }}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[5].windSpeed }} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[5].summary }}</label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[5]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[6].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[6].temperatureMin}}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[6].windSpeed}} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[6].summary }}</label>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <h1>{{getWeek()[6]}}</h1>
+          <h5>High</h5>
+          <label>{{ place.daily.data[7].temperatureMax }}°F</label>
+          <br>
+          <h5>Low</h5>
+          <label>{{ place.daily.data[7].temperatureMin }}°F</label>
+          <br>
+          <h5>Wind Speed</h5>
+          <label>{{ place.daily.data[7].windSpeed }} MPH</label>
+          <br>
+          <h5>Summary</h5>
+          <label>{{ place.daily.data[7].summary }}</label>
+        </div>
+      </div>
+
+
+
+
+</body>
+
+</html>
